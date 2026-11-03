@@ -35,16 +35,22 @@ const Acceso = (() => {
     }
 
     async function api(ruta, opciones = {}) {
-        const resp = await fetch(`https://api.github.com/repos/${sesion.owner}/${sesion.repo}/${ruta}`, {
-            ...opciones,
-            cache: "no-store",
-            headers: {
-                "Authorization": `Bearer ${sesion.token}`,
-                "Accept": opciones.accept || "application/vnd.github+json",
-                "X-GitHub-Api-Version": "2022-11-28",
-                ...(opciones.body ? { "Content-Type": "application/json" } : {})
-            }
-        });
+        if (!/^[\x21-\x7e]+$/.test(sesion.token)) throw new Error("El token tiene espacios o caracteres raros. Copialo de nuevo desde GitHub.");
+        let resp;
+        try {
+            resp = await fetch(`https://api.github.com/repos/${sesion.owner}/${sesion.repo}/${ruta}`, {
+                ...opciones,
+                cache: "no-store",
+                headers: {
+                    "Authorization": `Bearer ${sesion.token}`,
+                    "Accept": opciones.accept || "application/vnd.github+json",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                    ...(opciones.body ? { "Content-Type": "application/json" } : {})
+                }
+            });
+        } catch (e) {
+            throw new Error(`No se pudo conectar con api.github.com (${e.message}). Suele ser un bloqueador de anuncios, VPN o la red de la oficina: probá con datos móviles u otro navegador.`);
+        }
         if (!resp.ok) {
             let detalle = "";
             try { detalle = (await resp.json()).message; } catch (e) { /* sin cuerpo */ }
