@@ -63,7 +63,8 @@
     "id": 11,
     "nombre": "🎤 Comunicación y Oratoria",
     "descripcion": "Autores y conceptos de comunicación institucional y crisis.",
-    "activo": true
+    "activo": false,
+    "updated_at": "2026-11-03"
   },
   {
     "id": 12,
