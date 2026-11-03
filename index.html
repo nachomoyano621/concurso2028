@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>📚 CONCURSO POLICIAL 2028 · SIMULADOR POR TEMAS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- PANTALLA PRINCIPAL -->
+<div id="mainScreen" class="main-container">
+    <div class="header">
+        <h1>🚔 CONCURSO DE ASCENSOS 2028</h1>
+        <p>Policía de la Provincia · Ley 12.521 · Decretos · Manuales oficiales</p>
+        <p style="font-size:0.85rem; margin-top:8px;">📚 Seleccioná un tema para estudiar</p>
+    </div>
+    <div class="temas-grid" id="temasGrid">
+        <div class="mensaje">Cargando temas…</div>
+    </div>
+    <div class="pie"><a href="admin.html" style="color:inherit;">⚙️ Administrar preguntas</a></div>
+</div>
+
+<!-- CONTENEDOR PARA EL QUIZ -->
+<div id="quizScreen" class="quiz-container">
+    <div class="cabecera">
+        <button class="btn-volver" id="btnVolverPrincipal">← Volver a temas</button>
+        <h2 id="quizTitulo">Tema</h2>
+        <div class="progreso-barra"><div class="progreso-lleno" id="barraProgreso"></div></div>
+        <div class="contadores">
+            <span id="textoContador">Pregunta 0 / 0</span>
+            <span id="puntajeDisplay">✅ 0 · ❌ 0</span>
+        </div>
+    </div>
+    <div class="botonera-extra">
+        <button class="btn btn-download" id="btnDescargarCSV">📥 CSV</button>
+        <button class="btn btn-pdf" id="btnDescargarPDF">📄 PDF</button>
+        <button class="btn btn-sec" id="btnFinalizar">🏁 Finalizar</button>
+    </div>
+    <div class="cuerpo" id="cuerpoQuiz"></div>
+    <div class="pie">⚡ Modo estudio · Respuesta con explicación</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

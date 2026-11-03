@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "nombre": "📘 Ley 12.521 (Orgánica Policial)",
+    "descripcion": "Deberes, derechos, faltas, sanciones, ascensos y estructura.",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "nombre": "📗 Decreto 1166/18 (Concursos)",
+    "descripcion": "Antecedentes, oposición, puntajes, jurados, recursos.",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "nombre": "📕 Decreto 461/15 (Régimen Disciplinario)",
+    "descripcion": "Faltas leves/graves, sanciones, procedimiento sumarial (RSA).",
+    "activo": true
+  },
+  {
+    "id": 4,
+    "nombre": "💊 Microtráfico y Ley 14.239",
+    "descripcion": "Desfederalización, competencia, procedimientos, fallos.",
+    "activo": true
+  },
+  {
+    "id": 5,
+    "nombre": "⚖️ Código Penal Juvenil (Ley 14.228)",
+    "descripcion": "Menores de edad, imputabilidad, medidas socioeducativas.",
+    "activo": true
+  },
+  {
+    "id": 6,
+    "nombre": "🚺 Violencia de Género",
+    "descripcion": "Ley 26.485, modalidades, femicidio, protocolo policial.",
+    "activo": true
+  },
+  {
+    "id": 7,
+    "nombre": "👮 Conducción y Liderazgo",
+    "descripcion": "Mando, principios de conducción, liderazgo policial.",
+    "activo": true
+  },
+  {
+    "id": 8,
+    "nombre": "🔐 Seguridad de la Información",
+    "descripcion": "Triada CID, amenazas, buenas prácticas, 2FA.",
+    "activo": true
+  },
+  {
+    "id": 9,
+    "nombre": "⚠️ Faltas Leves y Graves",
+    "descripcion": "Infracciones disciplinarias, encuadramiento, atenuantes y agravantes.",
+    "activo": true
+  },
+  {
+    "id": 10,
+    "nombre": "📋 Sanciones Leves (RE · AS · AA)",
+    "descripcion": "Reconvención, Apercibimiento Simple y Apercibimiento Agravado.",
+    "activo": true
+  },
+  {
+    "id": 11,
+    "nombre": "🎤 Comunicación y Oratoria",
+    "descripcion": "Autores y conceptos de comunicación institucional y crisis.",
+    "activo": true
+  },
+  {
+    "id": 12,
+    "nombre": "🛡️ Seguridad Pública",
+    "descripcion": "Autores, enfoques de prevención y factores de riesgo.",
+    "activo": true
+  },
+  {
+    "id": 13,
+    "nombre": "🏳️‍🌈 Diversidad Sexual y de Género",
+    "descripcion": "Unidad VII: identidades, orientaciones y conceptos.",
+    "activo": true
+  },
+  {
+    "id": 14,
+    "nombre": "📝 Vistas 2025",
+    "descripcion": "Preguntas de la vista del examen 2025 (temas mixtos).",
+    "activo": true
+  },
+  {
+    "id": 15,
+    "nombre": "🏛️ Administración y Control (Ley 12.510)",
+    "descripcion": "Administración financiera, control interno y Tribunal de Cuentas.",
+    "activo": true
+  },
+  {
+    "id": 16,
+    "nombre": "📙 Ley 7.395 (Facultades Policiales)",
+    "descripcion": "Orgánica policial y facultades del art. 10 bis.",
+    "activo": true
+  },
+  {
+    "id": 17,
+    "nombre": "🎯 Armas y Tiro",
+    "descripcion": "Manejo, portación y uso de armas de fuego.",
+    "activo": true
+  },
+  {
+    "id": 18,
+    "nombre": "📑 Protocolos de Actuación",
+    "descripcion": "Protocolo de Activación Automática y Flagrancia.",
+    "activo": true
+  },
+  {
+    "id": 19,
+    "nombre": "🚓 Logística Policial",
+    "descripcion": "Recursos, abastecimiento y logística.",
+    "activo": true
+  }
+]
