@@ -38,7 +38,9 @@ const Acceso = (() => {
         if (!/^[\x21-\x7e]+$/.test(sesion.token)) throw new Error("El token tiene espacios o caracteres raros. Copialo de nuevo desde GitHub.");
         let resp;
         try {
-            resp = await fetch(`https://api.github.com/repos/${sesion.owner}/${sesion.repo}/${ruta}`, {
+            // Sin barra final: "repos/usuario/repo/" da 404 y el navegador lo reporta como "Failed to fetch"
+            const url = `https://api.github.com/repos/${sesion.owner}/${sesion.repo}` + (ruta ? `/${ruta}` : "");
+            resp = await fetch(url, {
                 ...opciones,
                 cache: "no-store",
                 headers: {
