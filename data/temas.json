@@ -99,7 +99,8 @@
     "id": 17,
     "nombre": "🎯 Armas y Tiro",
     "descripcion": "Manejo, portación y uso de armas de fuego.",
-    "activo": true
+    "activo": false,
+    "updated_at": "2026-11-03"
   },
   {
     "id": 18,
