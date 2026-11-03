@@ -15,10 +15,13 @@
         <p>Policía de la Provincia · Ley 12.521 · Decretos · Manuales oficiales</p>
         <p style="font-size:0.85rem; margin-top:8px;">📚 Seleccioná un tema para estudiar</p>
     </div>
+    <div class="banner-admin" id="bannerAdmin" hidden>
+        🔓 Modo administración · 🗑️ elimina (oculta) · ♻️ restaura · los cambios se guardan al instante
+    </div>
     <div class="temas-grid" id="temasGrid">
         <div class="mensaje">Cargando temas…</div>
     </div>
-    <div class="pie"><a href="admin.html" style="color:inherit;">⚙️ Administrar preguntas</a></div>
+    <div class="pie"><button class="link-pie" id="btnSesion">🔒 Administrar</button></div>
 </div>
 
 <!-- CONTENEDOR PARA EL QUIZ -->
@@ -41,6 +44,30 @@
     <div class="pie">⚡ Modo estudio · Respuesta con explicación</div>
 </div>
 
+<!-- LOGIN DE ADMINISTRACIÓN -->
+<dialog id="dlgLogin" class="dialogo">
+    <form method="dialog" id="formLogin">
+        <h3 id="loginTitulo">🔒 Administración</h3>
+        <label>Contraseña <input id="loginPassword" type="password" autocomplete="current-password"></label>
+        <div id="bloqueConfigurar" hidden>
+            <label>Repetir contraseña <input id="cfgPassword2" type="password" autocomplete="new-password"></label>
+            <label>Token de GitHub <input id="cfgToken" type="password" placeholder="github_pat_..." autocomplete="off"></label>
+            <label>Usuario de GitHub <input id="cfgOwner" autocapitalize="off"></label>
+            <label>Repositorio <input id="cfgRepo" autocapitalize="off"></label>
+            <label>Rama <input id="cfgBranch" value="main" autocapitalize="off"></label>
+            <p class="ayuda">Se hace una sola vez. El token se guarda en el repo cifrado con esta contraseña; después alcanza con la contraseña desde cualquier dispositivo.</p>
+        </div>
+        <p id="loginError" class="error-login" hidden></p>
+        <div class="botonera-extra">
+            <button class="btn btn-sec" value="cancelar" formnovalidate>Cancelar</button>
+            <button class="btn" value="ok" id="btnIngresar">Ingresar</button>
+        </div>
+    </form>
+</dialog>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="acceso.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

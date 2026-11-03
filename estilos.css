@@ -245,3 +245,94 @@ body {
     margin-bottom: 18px;
 }
 .resultado .botonera-extra { margin-top: 10px; }
+
+/* Administración */
+.banner-admin {
+    background: #8a5a00;
+    color: white;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+}
+.tema-card { position: relative; }
+.tema-card.inactivo { opacity: 0.55; border-left-color: #8a9bb0; }
+.tema-card .badge { margin: 2px 4px 2px 0; }
+.badge-gris { background: #6b7f94 !important; }
+.badge-rojo { background: #b33c1f !important; }
+.btn-icono {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid #b9ccde;
+    background: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.btn-icono.eliminar:hover { background: #ffe0de; border-color: #c53131; }
+.btn-icono.restaurar:hover { background: #caf0ce; border-color: #138b34; }
+.tema-card h3 { padding-right: 46px; }
+.admin-pregunta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: #fff4dd;
+    border: 1px solid #e6c47a;
+    border-radius: 16px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    font-size: 0.8rem;
+    color: #6b4a00;
+}
+.admin-pregunta.eliminada { background: #ffe0de; border-color: #e0a3a0; color: #771c1c; }
+.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
+.link-pie {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 8px;
+}
+.dialogo {
+    border: none;
+    border-radius: 24px;
+    padding: 20px;
+    width: min(420px, calc(100vw - 32px));
+    box-shadow: 0 25px 45px -15px rgba(0,20,50,0.5);
+}
+.dialogo::backdrop { background: rgba(11, 47, 74, 0.5); }
+.dialogo h3 { color: #0b2f4a; margin-bottom: 14px; }
+.dialogo label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; font-weight: 600; color: #0f293f; margin-bottom: 10px; }
+.dialogo input {
+    font: inherit;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px 12px;
+    border: 1.5px solid #b9ccde;
+    border-radius: 14px;
+}
+.ayuda { font-size: 0.8rem; color: #557c9a; }
+.error-login { color: #b63131; font-size: 0.85rem; margin-top: 6px; }
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, 150%);
+    max-width: calc(100vw - 32px);
+    background: #0b2f4a;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transition: transform 0.25s ease;
+    z-index: 20;
+}
+.toast.visible { transform: translate(-50%, 0); }
+.toast.ok { background: #0b6b2c; }
+.toast.error { background: #b63131; }

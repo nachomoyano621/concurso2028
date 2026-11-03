@@ -6,9 +6,10 @@ Simulador de preguntas por tema, publicado con **GitHub Pages**. Sin base de dat
 index.html          → estructura de la página
 app.js              → lógica del simulador (carga los JSON con fetch)
 estilos.css         → estilos
-admin.html/js/css   → panel de administración
+acceso.js           → login de administración y guardado en GitHub
 data/temas.json     → temas (módulos)
 data/preguntas.json → preguntas
+data/acceso.json    → token de GitHub cifrado (se crea en la configuración inicial)
 ```
 
 ## Estructura de los datos
@@ -53,27 +54,29 @@ data/preguntas.json → preguntas
 | `origen` | De dónde salió la pregunta (`concurso2025`, `NUEVO_VISTAS_2025`, `preguntas2028/...`). Sirve para filtrar. |
 | `activo` | `true` se muestra; `false` queda oculta. |
 
-## Panel de administración (`admin.html`)
+## Modo administración (desde el celu o la PC)
 
-Desde `https://<usuario>.github.io/<repo>/admin.html` (o el link "⚙️ Administrar preguntas" al pie del simulador) podés:
+Al pie del simulador: **🔒 Administrar** → contraseña. Con la sesión iniciada:
 
-- **Módulos**: crear, editar nombre/descripción, desactivar y reactivar. Un módulo inactivo desaparece del simulador con todas sus preguntas.
-- **Preguntas**: buscar por texto o ID, filtrar por módulo, estado y origen; crear, editar (texto, opciones, correcta, explicación), desactivar y reactivar. También desactivar/reactivar en bloque todas las que coinciden con el filtro (por ejemplo, todo un origen).
-- **Guardar en GitHub**: hace el commit directo en el repo. GitHub Pages publica en 1–2 minutos.
-- **Descargar JSON**: alternativa sin token; bajás `preguntas.json` / `temas.json` y los subís a `data/` desde la web de GitHub (*Add file → Upload files*).
+- Cada módulo muestra 🗑️ para eliminarlo (deja de verse con todas sus preguntas) o ♻️ para restaurarlo.
+- Dentro de un módulo, cada pregunta muestra **🗑️ Eliminar pregunta** o **♻️ Restaurar**. En modo admin también se ven las eliminadas, marcadas en rojo.
+- Cada cambio se guarda al instante como un commit en el repo y GitHub Pages lo publica en 1–2 minutos.
+- **🔓 Salir de administración** cierra la sesión en ese dispositivo.
 
-Los cambios quedan marcados en naranja hasta que se guardan. Nada se borra: todo es `activo: false`.
+Nada se borra físicamente: "eliminar" pone `activo: false`.
 
-### Crear el token (una sola vez)
+### Configuración inicial (una sola vez)
 
-1. GitHub → foto de perfil → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
-2. *Repository access*: **Only select repositories** → este repo.
-3. *Permissions → Repository permissions → Contents*: **Read and write**.
-4. Poné una fecha de vencimiento, generalo y pegalo en el panel (sección 🔑 Conexión con GitHub). Tildá "Recordar en este navegador" solo en tu computadora personal.
+1. Creá un token en GitHub → foto de perfil → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**:
+   - *Repository access*: **Only select repositories** → este repo.
+   - *Permissions → Repository permissions → Contents*: **Read and write**.
+   - Fecha de vencimiento: la que prefieras (cuando vence, hay que repetir este paso).
+2. Abrí el simulador → **🔒 Administrar**. Como todavía no hay configuración, pide contraseña (dos veces), el token, usuario y repositorio.
+3. Al confirmar, la página cifra el token con la contraseña (AES-GCM + PBKDF2) y sube `data/acceso.json`. Desde ahí, en cualquier dispositivo alcanza con la contraseña.
 
-El token se guarda únicamente en el navegador donde lo cargaste; el código público del sitio no lo contiene. Cualquiera puede abrir `admin.html`, pero sin un token con permiso de escritura no puede guardar nada. Si lo perdés o lo compartiste por error, revocalo en la misma pantalla de GitHub.
+Seguridad: la contraseña no está en el código y el token en el repo está cifrado. Aun así `acceso.json` es público, así que una contraseña larga hace mucho más difícil adivinarla por fuerza bruta. El token solo puede tocar el contenido de este repo y todo cambio queda en el historial de Git. Para cambiar la contraseña o el token: borrá `data/acceso.json` desde GitHub y repetí la configuración. Si sospechás que alguien lo obtuvo, revocá el token en GitHub.
 
-## Cómo administrar a mano (sin panel)
+## Cómo administrar a mano (editando los JSON)
 
 > Regla de oro: **nunca borrar** preguntas ni temas. Se desactivan con `"activo": false`. Git guarda el historial de todos los cambios.
 
