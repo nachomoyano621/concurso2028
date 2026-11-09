@@ -54,14 +54,31 @@ data/acceso.json    → token de GitHub cifrado (se crea en la configuración in
 | `origen` | De dónde salió la pregunta (`concurso2025`, `NUEVO_VISTAS_2025`, `preguntas2028/...`). Sirve para filtrar. |
 | `activo` | `true` se muestra; `false` queda oculta. |
 
+## Funciones de estudio
+
+Menú lateral (en el celu se abre con ☰):
+
+- **Inicio**: resumen de avance y módulos con barra de progreso.
+- **Módulos**: practicar un módulo completo.
+- **Test aleatorio (50)**: 50 preguntas al azar de todos los módulos; "Reintentar" arma otras 50.
+- **Simulacro de examen**: elegís módulos, cantidad y tiempo límite (con reloj).
+- **Repasar errores**: las que respondiste mal la última vez.
+- **Marcadas**: las que guardaste con ☆ (o tecla M).
+- **Buscar preguntas**: por texto, opción o `#ID`.
+- **Mis estadísticas**: avance y acierto por módulo, últimos exámenes.
+
+El progreso (respuestas, marcadas, exámenes) se guarda en el navegador de cada dispositivo. Tema claro/oscuro/automático con 🌓.
+
 ## Modo administración (desde el celu o la PC)
 
-Al pie del simulador: **🔒 Administrar** → contraseña. Con la sesión iniciada:
+Menú lateral → **🔒 Ingresar** → contraseña. Con la sesión iniciada aparece la sección **Administración**:
 
-- Cada módulo muestra 🗑️ para eliminarlo (deja de verse con todas sus preguntas) o ♻️ para restaurarlo.
-- Dentro de un módulo, cada pregunta muestra **🗑️ Eliminar pregunta** o **♻️ Restaurar**. En modo admin también se ven las eliminadas, marcadas en rojo.
+- **🗑️ Papelera**: módulos y preguntas eliminados, con **♻️ Restaurar**. Lo eliminado no aparece en ninguna otra parte del simulador.
+- **➕ Nueva pregunta** / **📁 Nuevo módulo**.
+- En cada pregunta (examen, buscador, marcadas): ✏️ editar y 🗑️ eliminar. Al eliminar aparece **Deshacer**.
+- En cada tarjeta de módulo: ✏️ editar y 🗑️ eliminar (se oculta con todas sus preguntas).
 - Cada cambio se guarda al instante como un commit en el repo y GitHub Pages lo publica en 1–2 minutos.
-- **🔓 Salir de administración** cierra la sesión en ese dispositivo.
+- **🔓 Cerrar sesión** cierra la sesión en ese dispositivo.
 
 Nada se borra físicamente: "eliminar" pone `activo: false`.
 
@@ -71,7 +88,7 @@ Nada se borra físicamente: "eliminar" pone `activo: false`.
    - *Repository access*: **Only select repositories** → este repo.
    - *Permissions → Repository permissions → Contents*: **Read and write**.
    - Fecha de vencimiento: la que prefieras (cuando vence, hay que repetir este paso).
-2. Abrí el simulador → **🔒 Administrar**. Como todavía no hay configuración, pide contraseña (dos veces), el token, usuario y repositorio.
+2. Abrí el simulador → menú lateral → **🔒 Ingresar**. Como todavía no hay configuración, pide contraseña (dos veces), el token, usuario y repositorio.
 3. Al confirmar, la página cifra el token con la contraseña (AES-GCM + PBKDF2) y sube `data/acceso.json`. Desde ahí, en cualquier dispositivo alcanza con la contraseña.
 
 Seguridad: la contraseña no está en el código y el token en el repo está cifrado. Aun así `acceso.json` es público, así que una contraseña larga hace mucho más difícil adivinarla por fuerza bruta. El token solo puede tocar el contenido de este repo y todo cambio queda en el historial de Git. Para cambiar la contraseña o el token: borrá `data/acceso.json` desde GitHub y repetí la configuración. Si sospechás que alguien lo obtuvo, revocá el token en GitHub.

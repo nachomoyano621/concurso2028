@@ -2,46 +2,42 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>📚 CONCURSO POLICIAL 2028 · SIMULADOR POR TEMAS</title>
-    <link rel="stylesheet" href="estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b2f4a">
+    <title>Concurso 2028 · Simulador de ascensos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="estilos.css?v=5">
 </head>
 <body>
 
-<!-- PANTALLA PRINCIPAL -->
-<div id="mainScreen" class="main-container">
-    <div class="header">
-        <h1>🚔 CONCURSO DE ASCENSOS 2028</h1>
-        <p>Policía de la Provincia · Ley 12.521 · Decretos · Manuales oficiales</p>
-        <p style="font-size:0.85rem; margin-top:8px;">📚 Seleccioná un tema para estudiar</p>
-    </div>
-    <div class="banner-admin" id="bannerAdmin" hidden>
-        🔓 Modo administración · 🗑️ elimina (oculta) · ♻️ restaura · los cambios se guardan al instante
-    </div>
-    <div class="temas-grid" id="temasGrid">
-        <div class="mensaje">Cargando temas…</div>
-    </div>
-    <div class="pie"><button class="link-pie" id="btnSesion">🔒 Administrar</button></div>
-</div>
-
-<!-- CONTENEDOR PARA EL QUIZ -->
-<div id="quizScreen" class="quiz-container">
-    <div class="cabecera">
-        <button class="btn-volver" id="btnVolverPrincipal">← Volver a temas</button>
-        <h2 id="quizTitulo">Tema</h2>
-        <div class="progreso-barra"><div class="progreso-lleno" id="barraProgreso"></div></div>
-        <div class="contadores">
-            <span id="textoContador">Pregunta 0 / 0</span>
-            <span id="puntajeDisplay">✅ 0 · ❌ 0</span>
+<div class="app" id="app">
+    <!-- MENÚ LATERAL -->
+    <aside class="sidebar" id="sidebar">
+        <a href="#/inicio" class="marca">
+            <span class="marca-icono">🚔</span>
+            <span><strong>Concurso 2028</strong><small>Simulador de ascensos</small></span>
+        </a>
+        <nav id="menu" class="menu"></nav>
+        <div class="sidebar-pie">
+            <button class="menu-item" id="btnTema">🌓 <span id="textoTema">Tema: automático</span></button>
         </div>
-    </div>
-    <div class="botonera-extra">
-        <button class="btn btn-download" id="btnDescargarCSV">📥 CSV</button>
-        <button class="btn btn-pdf" id="btnDescargarPDF">📄 PDF</button>
-        <button class="btn btn-sec" id="btnFinalizar">🏁 Finalizar</button>
-    </div>
-    <div class="cuerpo" id="cuerpoQuiz"></div>
-    <div class="pie">⚡ Modo estudio · Respuesta con explicación</div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+        <header class="topbar">
+            <button class="btn-hamburguesa" id="btnMenu" aria-label="Abrir menú">☰</button>
+            <h1 id="tituloVista">Inicio</h1>
+            <span class="estado-guardado" id="estadoGuardado"></span>
+            <span class="chip-admin" id="chipAdmin" hidden>🔓 Admin</span>
+        </header>
+        <div class="vista" id="vista">
+            <div class="vacio">Cargando preguntas…</div>
+        </div>
+    </main>
 </div>
 
 <!-- LOGIN DE ADMINISTRACIÓN -->
@@ -51,23 +47,65 @@
         <label>Contraseña <input id="loginPassword" type="password" autocomplete="current-password"></label>
         <div id="bloqueConfigurar" hidden>
             <label>Repetir contraseña <input id="cfgPassword2" type="password" autocomplete="new-password"></label>
-            <label>Token de GitHub <input id="cfgToken" type="password" placeholder="github_pat_..." autocomplete="off"></label>
+            <label>Token de GitHub <input id="cfgToken" type="password" placeholder="ghp_... o github_pat_..." autocomplete="off"></label>
             <label>Usuario de GitHub <input id="cfgOwner" autocapitalize="off"></label>
             <label>Repositorio <input id="cfgRepo" autocapitalize="off"></label>
             <label>Rama <input id="cfgBranch" value="main" autocapitalize="off"></label>
             <p class="ayuda">Se hace una sola vez. El token se guarda en el repo cifrado con esta contraseña; después alcanza con la contraseña desde cualquier dispositivo.</p>
         </div>
-        <p id="loginError" class="error-login" hidden></p>
-        <div class="botonera-extra">
-            <button class="btn btn-sec" value="cancelar" formnovalidate>Cancelar</button>
+        <p id="loginError" class="error-form" hidden></p>
+        <div class="dialogo-botones">
+            <button class="btn sec" value="cancelar" formnovalidate>Cancelar</button>
             <button class="btn" value="ok" id="btnIngresar">Ingresar</button>
+        </div>
+    </form>
+</dialog>
+
+<!-- EDITOR DE MÓDULO -->
+<dialog id="dlgModulo" class="dialogo">
+    <form method="dialog" id="formModulo">
+        <h3 id="tituloModulo">Módulo</h3>
+        <label>Nombre <input id="mNombre" required placeholder="📘 Ley 12.521"></label>
+        <label>Descripción <textarea id="mDescripcion" rows="2"></textarea></label>
+        <div class="dialogo-botones">
+            <button class="btn sec" value="cancelar" formnovalidate>Cancelar</button>
+            <button class="btn" value="ok">Guardar</button>
+        </div>
+    </form>
+</dialog>
+
+<!-- EDITOR DE PREGUNTA -->
+<dialog id="dlgPregunta" class="dialogo dialogo-ancho">
+    <form method="dialog" id="formPregunta">
+        <h3 id="tituloPregunta">Pregunta</h3>
+        <div class="form-grid">
+            <label>Módulo <select id="pTema"></select></label>
+            <label>Tipo
+                <select id="pTipo">
+                    <option value="mc">Opción múltiple</option>
+                    <option value="vf">Verdadero / Falso</option>
+                </select>
+            </label>
+        </div>
+        <label>Pregunta <textarea id="pTexto" rows="3"></textarea></label>
+        <div class="campo">
+            <span class="campo-titulo">Opciones <small>(marcá la correcta)</small></span>
+            <div id="pOpciones"></div>
+            <button type="button" class="btn sec chico" id="btnAgregarOpcion">+ Opción</button>
+        </div>
+        <label>Explicación <textarea id="pExplicacion" rows="2" placeholder="Art. ..."></textarea></label>
+        <label>Origen <input id="pOrigen"></label>
+        <p id="pError" class="error-form" hidden></p>
+        <div class="dialogo-botones">
+            <button class="btn sec" value="cancelar" formnovalidate>Cancelar</button>
+            <button class="btn" value="ok">Guardar</button>
         </div>
     </form>
 </dialog>
 
 <div id="toast" class="toast" role="status"></div>
 
-<script src="acceso.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="acceso.js?v=5"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
